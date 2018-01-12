@@ -1,0 +1,32 @@
+.container {
+  width: 500px;
+  margin: 0 auto;
+}
+
+h2 {
+  text-align: center;
+}
+
+button {
+  font-size: 12px;
+  background-color: #4267b2;
+  border-color: #29487d;
+  border-radius: 0;
+  color: white;
+  cursor: pointer;
+  height: 25px;
+}
+
+buttom:hover {
+  background-color: #365899;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0px;
+}
+
+li {
+  margin: 20px 0;
+  border: 1px solid black;
+}
