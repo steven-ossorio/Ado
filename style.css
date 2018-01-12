@@ -41,4 +41,6 @@ ul {
 li {
   margin: 20px 0;
   border: 1px solid black;
+  line-height: : 30px;
+  padding: 5px;
 }

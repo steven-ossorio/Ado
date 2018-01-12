@@ -5,11 +5,22 @@ document.addEventListener("DOMContentLoaded", () => {
   // }
 
   document.querySelector(".add-todo-button").addEventListener("click", (e) => {
-    console.log('clicked');
     let todoList = $l("#todo-item").arr[0].value;
-    console.log(todoList);
 
-    $l("#ul-list").append(`<li>${todoList}</li>`);
+    function setRandomBGColor () {
+      let letters = "123456789ABCDEF";
+      let color = "#";
+
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 15)];
+      }
+
+      return color;
+    }
+
+    let color = setRandomBGColor();
+
+    $l("#ul-list").append(`<li style="background: ${color}">${todoList}</li>`);
     $l("#todo-item").arr[0].value = "";
   });
 });
