@@ -1,10 +1,22 @@
 .container {
   width: 500px;
-  margin: 0 auto;
+  margin: 100px auto;
+}
+
+.submit-container {
+  text-align: center;
 }
 
 h2 {
   text-align: center;
+}
+
+#todo-item {
+  border: 1px solid #ccc;
+  height: 25px;
+  width: 150px;
+  font-size: 11px;
+  padding: 0 2px;
 }
 
 button {
