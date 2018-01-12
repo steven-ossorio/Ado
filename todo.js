@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let todoList = $l("#todo-item").arr[0].value;
     console.log(todoList);
 
-    $l("#ul-list").append("<li>$(`todoList`)</li>");
+    $l("#ul-list").append(`<li>${todoList}</li>`);
+    $l("#todo-item").arr[0].value = "";
   });
 });
