@@ -31,5 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".delete-todo-button").addEventListener("click", (e) => {
     e.preventDefault();
     console.log(e.target.parentNode.classList.value);
+
   });
 });
