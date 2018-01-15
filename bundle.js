@@ -107,7 +107,6 @@ $l(() => {
 
     listItem.append(button);
     const buttons = listItem.children();
-    debugger
     buttons.on('click', listItem.remove);
 
     $l("#ul-list").append(listItem);
