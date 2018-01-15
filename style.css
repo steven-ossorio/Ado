@@ -50,9 +50,25 @@ li {
 }
 
 footer {
+  padding: 10px;
+  color: white;
+  font-size: 20px;
   position: absolute;
-  top: 0;
-  left: -100px;
+  top: 40px;
+  left: -300px;
   display: flex;
   flex-direction: column;
+  background-color: black;
+}
+
+.links-container {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+a {
+  font-size: 25px;
+  text-decoration: none;
+  color: blue;
 }
