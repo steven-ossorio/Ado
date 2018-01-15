@@ -71,11 +71,12 @@ const $l = __webpack_require__(1);
 
 $l(() => {
   function deleteItem(e) {
-    console.log(e);
     e.target.parentNode.remove();
   }
 
   function addItem() {
+    let liLength = document.querySelectorAll("#ul-list")[0].children.length + 1;
+
     let inputValue = $l("#todo-input").htmlElements[0].value;
 
     if (inputValue === "") {
@@ -90,31 +91,31 @@ $l(() => {
         color += letters[Math.floor(Math.random() * 15)];
       }
 
-      return `background-color: ${color}`;
+      return color;
     }
 
     const color = setRandomBGColor();
 
-    const length = $l("li").htmlElements.length - 1;
+    // const length = $l("li").htmlElements.length - 1;
+    //
+    // const listItem = $l("<li>");
+    // listItem.append(inputValue);
+    // listItem.attr("style", color);
+    //
+    // const button = $l("<button>");
+    // button.attr("id", `button-${length}`);
+    // button.append("x");
+    //
+    // listItem.append(button);
+    // const buttons = listItem.children();
+    // buttons.on('click', listItem.remove);
 
-    const listItem = $l("<li>");
-    listItem.append(inputValue);
-    listItem.attr("style", color);
-
-    const button = $l("<button>");
-    button.attr("id", `button-${length}`);
-    button.append("x");
-
-    listItem.append(button);
-    const buttons = listItem.children();
-    buttons.on('click', listItem.remove);
-
-    $l("#ul-list").append(listItem);
+    $l("#ul-list").append(`<li class="${liLength}" style="background-color: ${color}">${inputValue}  <button class="delete-todo-button" type="submit" name="button">X</button></li>`);
+    $l(".delete-todo-button").on("click", deleteItem);
     $l("#todo-input").htmlElements[0].value = "";
   }
 
   $l(".add-todo-button").on("click", addItem);
-  $l(".delete-todo-button").on("click", deleteItem);
 });
 
 
