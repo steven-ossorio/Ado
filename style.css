@@ -13,9 +13,9 @@ h2 {
   font-size: 40px;
 }
 
-#todo-item {
+#todo-input {
   border: 1px solid #ccc;
-  height: 25px;
+  height: 24px;
   width: 150px;
   font-size: 11px;
   padding: 0 2px;
@@ -36,15 +36,21 @@ buttom:hover {
 }
 
 ul {
+  padding: 2px 10px;
   list-style: none;
-  padding-left: 0px;
+  /*padding-left: 0px;*/
+  background-color: yellow;
+}
+
+.first {
+  background-color: blue;
 }
 
 li {
   display: flex;
   justify-content: space-between;
   margin: 20px 0;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   line-height: : 30px;
   padding: 5px;
 }
