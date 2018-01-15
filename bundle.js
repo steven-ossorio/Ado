@@ -67,14 +67,112 @@
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const DOMNodeCollection = __webpack_require__(1);
-const todo = __webpack_require__(2);
+const $l = __webpack_require__(1);
+
+$l(() => {
+  function deleteItem(e) {
+    console.log(e);
+    e.target.parentNode.remove();
+  }
+
+  function addItem() {
+    let inputValue = $l("#todo-input").htmlElements[0].value;
+
+    if (inputValue === "") {
+      inputValue = "I will not allow this list to be empty";
+    }
+
+    function setRandomBGColor () {
+      let letters = "123456789ABCDEF";
+      let color = "#";
+
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 15)];
+      }
+
+      return `background-color: ${color}`;
+    }
+
+    const color = setRandomBGColor();
+
+    const length = $l("li").htmlElements.length - 1;
+
+    const listItem = $l("<li>");
+    listItem.append(inputValue);
+    listItem.attr("style", color);
+
+    const button = $l("<button>");
+    button.attr("id", `button-${length}`);
+    button.append("x");
+
+    listItem.append(button);
+    const buttons = listItem.children();
+    debugger
+    buttons.on('click', listItem.remove);
+
+    $l("#ul-list").append(listItem);
+    $l("#todo-input").htmlElements[0].value = "";
+  }
+
+  $l(".add-todo-button").on("click", addItem);
+  $l(".delete-todo-button").on("click", deleteItem);
+});
+
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   // function addADoItem () {
+//   //   let todoList = $("#todo-item").val();
+//   //   console.log(todoList);
+//   // }
+//
+  // document.querySelector(".add-todo-button").addEventListener("click", (e) => {
+  //   let liLength = document.querySelectorAll("#ul-list")[0].children.length + 1;
+  //   let todoList = $l("#todo-input").arr[0].value;
+  //
+  //   if (todoList === "") {
+  //       todoList = "I will not allow this list to be empty";
+  //   }
+  //   function setRandomBGColor () {
+  //     let letters = "123456789ABCDEF";
+  //     let color = "#";
+  //
+  //     for (let i = 0; i < 6; i++) {
+  //       color += letters[Math.floor(Math.random() * 15)];
+  //     }
+  //
+  //     return color;
+  //   }
+  //
+  //   let color = setRandomBGColor();
+  //
+  //   $l("#ul-list").append(`<li class="${liLength}" style="background: ${color}">${todoList}  <button class="delete-todo-button" type="submit" name="button">X</button></li>`);
+  //   $l("#todo-item").arr[0].value = "";
+  // });
+//
+//   document.querySelector(".delete-todo-button").addEventListener("click", (e) => {
+//     e.preventDefault();
+//     console.log(e.target.parentNode.classList.value);
+//
+//   });
+// });
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const DOMNodeCollection = __webpack_require__(2);
+const todo = __webpack_require__(0);
 let funcArr = [];
 let loaded = false;
 
 const $l = selector => {
   // If selector is a string.
   if (typeof selector === "string") {
+    if (selector[0] === '<') {
+      const htmlElement = document.createElement(selector.slice(1, -1));
+      return new DOMNodeCollection([htmlElement]);
+    }
     // Returns all the dom elements
     return getNodes(selector);
     // Check if the selector is an element of HTML
@@ -153,7 +251,7 @@ module.exports = $l;
 
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports) {
 
 class DOMNodeCollection {
@@ -186,7 +284,7 @@ class DOMNodeCollection {
       // Iterate the array of this instance
       this.htmlElements.forEach(outerElement => {
         // Iterate the array within the passed object
-        newElement.htmlElement.forEach(innerElement => {
+        newElement.htmlElements.forEach(innerElement => {
             // Assign each outerElement as parent to each innerElement
           outerElement.innerHTML += innerElement.outerHTML;
         });
@@ -270,13 +368,10 @@ class DOMNodeCollection {
     this.htmlElements.forEach(htmlElement=> {
       // Set an event listener to each element
       htmlElement.addEventListener(type, listener);
-      // Check if key is defined
-      if (htmlElement[type] === "undefined") {
-        // If not defined then set a key to empty array
-        htmlElement[type] = [];
-      }
+      const key = `jqueryEvent-${type}`;
+      const listeners = htmlElement[key] || [];
       // Push in the listener to the empty array
-      htmlElement[type].push(listener);
+      htmlElement[key] = listeners.push(listener);
     });
   }
 
@@ -294,77 +389,6 @@ class DOMNodeCollection {
 }
 
 module.exports = DOMNodeCollection;
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-const $l = __webpack_require__(0);
-
-$l(() => {
-  function addItem() {
-    $l(".add-todo-button").on("click", e => {
-      let inputValue = $l("#todo-input").arr[0].value;
-
-      if (inputValue === "") {
-        inputValue = "I will not allow this list to be empty";
-      }
-
-      function setRandomBGColor () {
-        let letters = "123456789ABCDEF";
-        let color = "#";
-
-        for (let i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 15)];
-        }
-
-        return color;
-      }
-
-      $l("#ul-list").append(`<li class="${liLength}" style="background: ${color}">${todoList}  <button class="delete-todo-button" type="submit" name="button">X</button></li>`);
-      $l("#todo-input").arr[0].value = "";
-    });
-  }
-});
-
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   // function addADoItem () {
-//   //   let todoList = $("#todo-item").val();
-//   //   console.log(todoList);
-//   // }
-//
-  // document.querySelector(".add-todo-button").addEventListener("click", (e) => {
-  //   let liLength = document.querySelectorAll('#ul-list')[0].children.length + 1;
-  //   let todoList = $l("#todo-input").arr[0].value;
-  //
-  //   if (todoList === "") {
-  //       todoList = "I will not allow this list to be empty";
-  //   }
-  //   function setRandomBGColor () {
-  //     let letters = "123456789ABCDEF";
-  //     let color = "#";
-  //
-  //     for (let i = 0; i < 6; i++) {
-  //       color += letters[Math.floor(Math.random() * 15)];
-  //     }
-  //
-  //     return color;
-  //   }
-  //
-  //   let color = setRandomBGColor();
-  //
-  //   $l("#ul-list").append(`<li class="${liLength}" style="background: ${color}">${todoList}  <button class="delete-todo-button" type="submit" name="button">X</button></li>`);
-  //   $l("#todo-item").arr[0].value = "";
-  // });
-//
-//   document.querySelector(".delete-todo-button").addEventListener("click", (e) => {
-//     e.preventDefault();
-//     console.log(e.target.parentNode.classList.value);
-//
-//   });
-// });
 
 
 /***/ })
