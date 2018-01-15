@@ -1,6 +1,7 @@
 .container {
   width: 500px;
   margin: 100px auto;
+  position: relative;
 }
 
 .submit-container {
@@ -46,4 +47,12 @@ li {
   border: 1px solid black;
   line-height: : 30px;
   padding: 5px;
+}
+
+footer {
+  position: absolute;
+  top: 0;
+  left: -100px;
+  display: flex;
+  flex-direction: column;
 }
